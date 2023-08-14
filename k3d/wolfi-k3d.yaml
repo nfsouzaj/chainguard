@@ -3,11 +3,15 @@ package:
   version: 5.5.2
   epoch: 0
   description: Little helper to run CNCF's k3s in Docker
+  target-architecture:
+  - aarch64
   copyright:
     - license: Apache-2.0
 
 environment:
   contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
     packages:
       - build-base
       - busybox

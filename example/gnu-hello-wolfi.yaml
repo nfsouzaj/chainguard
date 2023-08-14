@@ -4,7 +4,7 @@ package:
   epoch: 0
   description: "the GNU hello world program"
   target-architecture:
-    - arm64
+    - all
   copyright:
     - paths:
       - "*"
@@ -19,14 +19,12 @@ package:
 environment:
   contents:
     repositories:
-      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/os
+    keyring:
+      - https://packages.wolfi.dev/os/wolfi-signing.rsa.pub
     packages:
-      - alpine-baselayout-data
-      - busybox
+      - wolfi-base
       - build-base
-      - scanelf
-      - ssl_client
-      - ca-certificates-bundle
 
 pipeline:
   - uses: fetch
@@ -37,3 +35,8 @@ pipeline:
   - uses: autoconf/make
   - uses: autoconf/make-install
   - uses: strip
+
+subpackages:
+  - name: "hello-doc"
+    pipeline:
+      - uses: split/manpages
